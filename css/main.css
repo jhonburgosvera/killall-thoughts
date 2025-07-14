@@ -1,0 +1,328 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* Colores terminal clásico */
+    --bg: #000000;
+    --bg-alt: #0a0a0a;
+    --text: #00ff00;
+    --text-dim: #008000;
+    --text-white: #ffffff;
+    --text-gray: #808080;
+    --accent: #00ffff;
+    --accent-alt: #ffff00;
+    --error: #ff0000;
+    
+    /* Tipografía */
+    --font-mono: 'Courier New', 'Monaco', monospace;
+    
+    /* Espaciado */
+    --gap: 1rem;
+    --gap-sm: 0.5rem;
+    --gap-xs: 0.25rem;
+}
+
+body {
+    font-family: var(--font-mono);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.4;
+    font-size: 14px;
+    margin: 0;
+    padding: var(--gap);
+}
+
+/* Header estilo prompt */
+header {
+    margin-bottom: var(--gap);
+    border-bottom: 1px solid var(--text-dim);
+    padding-bottom: var(--gap-sm);
+}
+
+header h1 {
+    font-size: 16px;
+    font-weight: normal;
+    margin-bottom: var(--gap-sm);
+}
+
+header h1 a {
+    color: var(--text);
+    text-decoration: none;
+}
+
+header h1 a:hover {
+    color: var(--accent);
+}
+
+/* Navegación simple */
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: var(--gap);
+}
+
+nav a {
+    color: var(--text-white);
+    text-decoration: underline;
+    text-decoration-color: var(--text-dim);
+}
+
+nav a:hover {
+    color: var(--accent);
+    text-decoration-color: var(--accent);
+}
+
+nav a:visited {
+    color: var(--text-gray);
+}
+
+/* Contenido principal */
+main {
+    max-width: 800px;
+}
+
+/* Secciones */
+.section {
+    margin-bottom: calc(var(--gap) * 2);
+}
+
+.section h2 {
+    color: var(--text-white);
+    font-size: 16px;
+    font-weight: normal;
+    margin-bottom: var(--gap-sm);
+    text-transform: uppercase;
+}
+
+.section h2::before {
+    content: '# ';
+    color: var(--text-dim);
+}
+
+.section p {
+    color: var(--text-white);
+    margin-bottom: var(--gap-sm);
+}
+
+/* Lista de artículos estilo ls */
+.article-list {
+    background: var(--bg-alt);
+    border: 1px solid var(--text-dim);
+    padding: var(--gap-sm);
+    margin-bottom: var(--gap);
+}
+
+.list-header {
+    color: var(--text-dim);
+    margin-bottom: var(--gap-sm);
+    font-size: 12px;
+}
+
+.article-item {
+    display: block;
+    margin-bottom: var(--gap-xs);
+    font-size: 14px;
+}
+
+.article-item:hover {
+    background: var(--text-dim);
+    color: var(--bg);
+}
+
+.article-date {
+    color: var(--text-dim);
+    display: inline-block;
+    width: 80px;
+}
+
+.article-title {
+    color: var(--text-white);
+    text-decoration: none;
+    margin-right: var(--gap-sm);
+}
+
+.article-title:hover {
+    text-decoration: underline;
+    color: var(--accent);
+}
+
+.article-tags {
+    color: var(--text-dim);
+    font-size: 12px;
+}
+
+.article-tags::before {
+    content: '# ';
+}
+
+/* Barra de scroll simple */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--text-dim);
+    border: 1px solid var(--text);
+}
+
+/* Footer minimalista */
+footer {
+    margin-top: calc(var(--gap) * 3);
+    border-top: 1px solid var(--text-dim);
+    padding-top: var(--gap);
+    color: var(--text-dim);
+    font-size: 12px;
+}
+
+footer a {
+    color: var(--text-dim);
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: var(--text);
+}
+
+/* Código inline */
+code {
+    background: var(--bg-alt);
+    color: var(--accent-alt);
+    padding: 1px 3px;
+    border: 1px solid var(--text-dim);
+}
+
+/* Bloques de código */
+pre {
+    background: var(--bg-alt);
+    border: 1px solid var(--text-dim);
+    padding: var(--gap-sm);
+    overflow-x: auto;
+    margin: var(--gap) 0;
+}
+
+pre code {
+    background: none;
+    border: none;
+    color: var(--text);
+    padding: 0;
+}
+
+/* Links generales */
+a {
+    color: var(--text-white);
+    text-decoration: underline;
+    text-decoration-color: var(--text-dim);
+}
+
+a:hover {
+    color: var(--accent);
+    text-decoration-color: var(--accent);
+}
+
+a:visited {
+    color: var(--text-gray);
+}
+
+/* Responsive básico */
+@media (max-width: 600px) {
+    body {
+        font-size: 12px;
+        padding: var(--gap-sm);
+    }
+    
+    nav ul {
+        flex-direction: column;
+        gap: var(--gap-xs);
+    }
+    
+    .article-item {
+        font-size: 12px;
+    }
+    
+    .article-date {
+        width: 70px;
+    }
+}
+
+/* Cursor parpadeante solo en el título */
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+header h1 a::after {
+    content: '_';
+    animation: blink 1s infinite;
+    color: var(--text);
+}
+
+/* Hover effects sutiles */
+.article-item:hover .article-title {
+    color: var(--bg);
+}
+
+.article-item:hover .article-date,
+.article-item:hover .article-tags {
+    color: var(--bg);
+}
+
+/* Selección de texto */
+::selection {
+    background: var(--text);
+    color: var(--bg);
+}
+
+/* Estilo para categorías */
+.category-item {
+    display: block;
+    margin-bottom: var(--gap-xs);
+    font-size: 14px;
+}
+
+.category-item:hover {
+    background: var(--text-dim);
+    color: var(--bg);
+}
+
+.category-icon {
+    display: inline-block;
+    width: 20px;
+    color: var(--text-dim);
+}
+
+.category-name {
+    color: var(--text-white);
+    text-decoration: none;
+    margin-right: var(--gap-sm);
+}
+
+.category-name:hover {
+    text-decoration: underline;
+    color: var(--accent);
+}
+
+.category-count {
+    color: var(--text-dim);
+    font-size: 12px;
+}
+
+/* Separadores */
+hr {
+    border: none;
+    border-top: 1px solid var(--text-dim);
+    margin: var(--gap) 0;
+}
+
+/* Estilo para cuando el contenido está cargando */
+.loading::after {
+    content: '_';
+    animation: blink 0.5s infinite;
+}
