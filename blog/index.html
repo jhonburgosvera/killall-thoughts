@@ -21,13 +21,17 @@
         <section class="section">
             <h2>ls -la posts</h2>
             <div class="article-list">
-                <div class="list-header">total 1</div>
+                <div class="list-header">total <span id="total-count"></span></div>
                 <div class="article-item">
                     <span class="article-date">jul 14</span>
                     <a href="posts/test.html" class="article-title">test.txt</a>
                     <span class="article-tags">sysadmin linux web</span>
                 </div>
             </div>
+            <script>
+                const total = document.querySelectorAll('.article-item').length;
+                document.getElementById('total-count').textContent = total;
+            </script>
         </section>
     </main>
     

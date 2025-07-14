@@ -29,7 +29,7 @@
             <h2>ls -la blog/posts</h2>
             
             <div class="article-list">
-                <div class="list-header">total 1</div>
+                <div class="list-header">total <span id="total-articles-count"></span></div>
                 
                 <div class="article-item">
                     <span class="article-date">jul 14</span>
@@ -38,12 +38,16 @@
                 </div>
 
             </div>
+            <script>
+                const total_articles = document.querySelectorAll('.article-item').length;
+                document.getElementById('total-articles-count').textContent = total_articles;
+            </script>
         </section>
         
         <section class="section">
             <h2>ls categories/</h2>
             <div class="article-list">
-                <div class="list-header">total 4</div>
+                <div class="list-header">total <span id="total-categories-count"></span></div>
                 
                 <div class="category-item">
                     <span class="category-icon">📁</span>
@@ -69,6 +73,10 @@
                     <span class="category-count">0 files</span>
                 </div>
             </div>
+            <script>
+                const total_categories = document.querySelectorAll('.category-item').length;
+                document.getElementById('total-categories-count').textContent = total_categories;
+            </script>
         </section>
     </main>
     
