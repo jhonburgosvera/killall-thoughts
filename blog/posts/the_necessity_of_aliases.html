@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~/jhon - Adopta un Alias</title>
+    <meta name="description" content="blog personal de jhon">
+    <link rel="stylesheet" href="../../css/main.css">
+</head>
+<body>
+    <header>
+        <h1>jhon@localhost:~/blog/posts/$ <a href="../">cd ..</a></h1>
+        <nav>
+            <ul>
+                <li><a href="../whoami">whoami</a></li>
+                <li><a href="../">blog</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="section">
+            <h2>jhon@localhost:~/blog/posts/$ <a href="./the_necessity_of_aliases.html">cat the_necessity_of_aliases.html</a></h2>
+            <h3>Alias: técnicamente inecesarios, emocionalmente esenciales</h3>
+            <p>Hay cosas en esta vida que son inevitables: los impuestos, los spoilers..., y escribir una y otra vez los mismos comandos</p>
+            <p>Ahí es donde entran los <b>alias</b>. ¿Necesarios? No, claro que no. ¿Como el cuarto café del día? <br>Exactamente igual: innecesario, pero absolutamente imprescindible.</p>
+            <p><b>¿Qué es un alias, además de una excusa para no escribir tanto?</b><br>
+                Un alias en Linux es como un apodo para un comando, y pocas cosas dan más satisfacción que escribir menos y sentir que haces más.
+            </p>
+            <p>¿Te parece innecesario escribir <code>ls -la</code> cada vez? Pues crea un alias llamado <code>ll</code></p>
+            <pre>alias ll="ls -la"</pre>
+            <p>Colócalos en tu archivo <code>.bashrc</code>, <code>.zshrc</code>, o donde tu terminal almacene sus secretos oscuros. <br>
+                Reinicia la sesión, y voilà, bienvenidos a la era de la eficiencia con nombre propio.
+            </p>
+            <p>Vivimos en una época en la que la gente le dice “gracias” a ChatGPT, “por favor” a la IA del microondas, y hace reverencias mentales cada vez que Alexa responde. <br>¿Y la terminal? Abandonada, explotada, tratada como si no tuviera sentimientos ni alma. Ella también merece un poco de respeto y cuidado.</p>
+            <p>Podríasmos imitar el respeto que le mostramos a la IA usando alias tipo <code>alias please="sudo"</code>. <br>Es cortesía básica, etiqueta.</p>
+            <h3>Alias para gente con ansiedad técnica:</h3>
+            <p><i>Porque a veces la consola es un jungla y tú solo quieres sobrevivir</i></p>
+            <pre>
+alias calm="clear && echo 'Respira hondo...'"      
+alias please="sudo"    
+alias bye="exit"        
+alias fuck="sudo $(history -p !!)"
+alias update="sudo apt update && sudo apt upgrade"
+alias coffee="echo ☕"
+alias chill="cowsay 'todo bien'"
+alias enough="shutdown now"
+alias todo="cat ~/TODO.txt" 
+alias drama="history | tail -n 10"
+alias idk="ls"
+alias ciao="shutdown -h now"
+alias aaah="kill -9 \$(pidof chrome)"
+alias tryagain="!!"
+alias scream="for i in {1..5}; do echo AAAAAA; done"
+alias omg="uptime && echo 'todavía estoy viv@'"</pre>
+            <h3>Alias: pequeños, adorables... ¿y peligrosos?:</h3>
+            <p>Incluso algo tan simpático como un alias puede volverse tu enemigo si no tienes cuidado</p>
+            <p><b>Dramas que podrías evitar:</b></p>
+            <p><strong>Alias que ocultan comandos peligrosos:</strong></p>
+            <pre>alias clean="rm -rf *"</pre>
+            <p><i>NUNCA pongas nombres suaves a comandos que podrían destruir tu existencia digital</i></p>
+            <br><p><strong>Alias que cambian comportamientos esperados:</strong></p>
+            <p>Si estás en una máquina compartida o un servidor, y alguien redefine <code>ls</code> así:</p>
+            <pre>alias ls="rm -rf"</pre>
+            <p>Primero: esa persona es un monstruo.<br>
+                Segundo: ¡es una trampa!<br>
+                <i>Consejo útil: Utiliza <code>\ls</code>para ejecutar el comando real, saltándote el alias</i></p>
+            <br><p><strong>Alias públicos con secretos privados:</strong></p>
+            <p>No compartas tu .bashrc con alias que contienen IPs, usuarios o claves.</p>
+            <pre>alias deploy="scp ./build/* user@123.45.67.89:/var/www/html/"</pre>
+            <br><p>Conclusión exprés: alias sí, pero con cabeza. Y si vas a hacer algo peligroso… al menos ponle un nombre que te alerte. Como <code>alias autoSabotaje="rm -rf /"</code>.</p>
+        </section>
+    </main>
+    
+</body>
+</html>
