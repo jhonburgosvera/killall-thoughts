@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~/jhon - terminal</title>
+    <meta name="description" content="blog personal de jhon">
+    <link rel="stylesheet" href="../../css/main.css">
+</head>
+<body>
+    <header>
+        <h1>jhon@localhost:~/blog/posts/$ <a href="../">cd ..</a></h1>
+        <nav>
+            <ul>
+                <li><a href="../whoami">whoami</a></li>
+                <li><a href="../">blog</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="section">
+            <h2>jhon@localhost:~/blog/posts/$ <a href="./sticky_bit.html">cat sticky_bit.txt</a></h2>
+            <h3>EL STICKY BIT: O POR QUÉ TU ARCHIVO NO DEBERÍA ACABAR EN LA PAPELERA DE OTRO GIL</h3>
+            <p>Vamos a ver. <br>Tú crees que estás trabajando en un entorno multiusuario porque Linux es muy libre y muy alternativo y muy de cooperativa autogestionada. Pero en realidad, si no activas el sticky bit, estás viviendo en el equivalente digital de un piso de estudiantes donde todo el mundo puede entrar a la nevera y comerse TU tarta de queso. Y claro, cuando preguntas, nadie sabe nada. La culpa es de "el sistema".</p>
+            <p>Pues no. La culpa es tuya por no saber lo que es el sticky bit.</p>
+            <h3>¿QUÉ ES EL STICKY BIT?</h3>
+            <p>El sticky bit, en critiano: Es <b>un permiso especial que evita que otro usuario borre tus archivos en un directorio compartido</b>.
+                ¿Te suena <code>/tmp</code>? Ese directorio de archivos temporales que todos los usuarios pueden usar, pero donde , ooh sorpresa, no quieres que venga Manolito y te borre tus logs porque "no sabía que eran tuyos".
+            </p>
+            <p>Pues el sticky bit dice: "Mira, tú puedes entrar aquí, puedes dejar tus porquerías, pero lo mío ni lo toques. Gracias.”</p>
+            <h3>"¿CÓMO SÉ SI ESTÁ ACTIVADO?"</h3>
+            <p>Muy facil abres la terminal y listas los permisos del directoio en cuestión (yo usaré <code>/tmp</code>)</p>
+            <pre>ls -ld /tmp</pre>
+            <p>Y verás algo parecido a:</p>
+            <pre>drwxrwxrw<b style="color:red">t</b> 10 root root 4096 jul 15 12:00 /tmp</pre>
+            <p>Donde lo que tienes que buscar es esa <b style="color: red;">t</b> (el sticky bit) en la columna final de los permisos (los permisos de ejecución para <i>others</i>). <br>Si ves el sticky bit en vez de los clásicos <code>-</code> o <code>x</code> significa que está activado. </p>
+            <h3>¿CÓMO LO ACTIVO? PORQUE OBVIAMENTE NADIE TE LO PONE POR DEFECTO</h3>
+            <pre>chmod +t mi_carpeta</pre>
+            <p>Y ya está. Bienvenido al club de los que ya no lloran por <code>rm</code> ajeno</p>
+            <p>¿Quieres quitarlo? Claro, tú verás. A lo mejor eres de los que comparten hasta el cepillo de dientes:</p>
+            <pre>chmod -t mi_carpeta</pre>
+            <h3>¿Cuando usarlo?</h3>
+            <p>Antes que nada: Sticky bit se aplica a directorios no a archivos directamente. Aplicarlo en archivos es una práctica obsoleta que probablemente tu distribución Linux no soporte o no se comporte como esperas.</p>
+            <p>Se suele usar cuando hay más de un usuario en el sistema y usáis la misma carpeta. Punto. No hay más. ¿Carpeta pública? Sticky bit. ¿Carpeta para trabajos en grupo? Sticky bit. ¿Carpeta donde se imprimen PDFs automáticamente y nadie sabe de dónde salen? Sticky. Bit.</p>
+            <h3>CONCLUSIÓN: EL STICKY BIT COMO ACTO POLÍTICO</h3>
+            <p>Sticky bit: Es entender que lo común no es sinónimo de anarquía
+            </p>
+        </section>
+    </main>
+    
+</body>
+</html>
