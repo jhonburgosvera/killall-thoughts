@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~/jhon - terminal</title>
+    <meta name="description" content="blog personal de jhon">
+    <link rel="stylesheet" href="../../css/main.css">
+</head>
+<body>
+    <header>
+        <h1>jhon@localhost:~/blog/posts/$ <a href="../">cd ..</a></h1>
+        <nav>
+            <ul>
+                <li><a href="../whoami">whoami</a></li>
+                <li><a href="../">blog</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="section">
+            <h2>jhon@localhost:~/blog/posts/$ <a href="./about_links.html">cat about_links.txt</a></h2>
+            <h3>INODE: HARD LINKS, SOFT LINKS, Y OTRAS CRISIS DE IDENTIDAD DIGITAL</h3>
+            <p>Vamos a ver</p>
+            <p>Tú estás en tu sistema Linux, tranquilito, convencido de que cuando copias o enlazas un archivo lo entiendes todo, que <code>cp</code>, que <code>ln</code>, que "ay mira, me he hecho un alias del archivo".
+                <br><br><b>Pues NO</b>. <br><br>Si no entiendes la diferencia entre un <b>hard link</b> y un <b>soft link</b>, estás a un <code>rm</code> de perder cosas importantes. Y todo empieza con entender qué es un <strong>inode</strong>.
+            </p>
+            <h3>¿Y QUÉ ES ESE TAL INODE?</h3>
+            <p>Ok, aquí viene lo bueno.</p>
+            <p>Olvida el nombre bonito que ves en pantalla;</p>
+            <p><code>proyecto_final_definitivo_sinerrores.docx</code>, <code>carta_renuncia.txt</code>, .... </p>
+            <p>Ese es solo un alias, una etiqueta puesta ahí para que tú no te pierdas.</p>
+            <p><strong>Un archivo en linux es: inode + bloque de datos</strong></p>
+            <p><b>El inode es la ficha policial del archivo</b>. Ahí está todo; dueño, huellas digitales, y cuántas veces lo han toqueteado:</p>
+            <p>&ensp;- El dueño del archivo (no, no siempre eres tú, flipao).</p>
+            <p>&ensp;- Los permisos (que no te enteras ni con <code>ls -l</code>).</p>
+            <p>&ensp;- Cuánto pesa, cuándo lo modificaste, cuándo lo miraste… todo el chisme.</p>
+            <p>&ensp;- Y lo más importante: los punteros a los bloques donde está el contenido real.</p>
+            <p>&ensp;- Ah, y el número de hard links que lo mantienen con vida.</p>
+            <p>Es decir, el inodo no es tu archivo.<br>Pero sin él, tu archivo no existe.</p>
+            <p><b>¿Y EL NOMBRE?</b></p>
+            <p>Ah, sí. El nombre.<br><b>El chiste del siglo</b></p>
+            <p><b>El nombre no está en el inode.</b>
+                <br>Está en la carpeta que lo contiene, en el directorio.
+                <br>Lo que tú llamas "archivo" es solo una pegatina cutre pegada en la puerta que dice:
+                <br>&ensp;<i>"Esto apunta al inode 348902."</i>
+                <p>¿Y SABES QUÉ?</p>
+                <p>Puede haber <b>varias pegatinas</b> que apunten al mismo inode (ejem, hardlinks, ejem)</p>
+            </p>
+        </section>
+        <section class="section">
+            <h3>QUÉ ES UN LINK?</h3>
+            <p>Un link es una forma de decirle al sistema: <br><i>"Esto también apunta a aquel inodo. Trátalo como el mismo archivo, o al menos finge que lo haces."</i></p>
+            <p>La diferencia entre soft link y hard link, es el grado de impliación de cada uno con el inode</p>
+            <br><h3>SOFT LINK (AKA ENLACE SIMBÓLICO)</h3>
+            <p>Un soft link es un tipo de archivo especial que <b>apunta al nombre</b> de otro archivo
+            <br>Es decir, apunta a la pegatina, NO al contenido</p>
+            <pre>ln -s archivo_original.txt enlace.txt</pre>
+            <p>Soft links pueden apuntar a archivos, carpetas, o incluso a cosas que no existen todavía.</p>
+            <p>Ejecutando un <code>ls -l</code> te aparecerá con una <code>l</code> en la columna del tipo de archivo:</p>
+            <pre><b style="color: red;">l</b>rwxrwxrwx 1 usuario grupo 17 jul 16 09:00 enlace.txt -> archivo_original.txt</pre>
+            <p>Si por maldad o jugeteo se te ocurre eliminar, mover o renombrar el original, te queda un link apuntando a la nada, al <i>vacío simbólico</i>. No aguanta el silencio y <b>se rompe</b>. De ahí lo de <i>soft</i>.</p>
+            <h3>HARD LINK (EL VERDADERO ENLACE)</h3>
+            <p>Esto ya es otra historia.
+                <br>Un hardlink NO apunta al nombre, <b>apunta al inode</b> directamente.
+                <br>Sin intermediarios. Sin dramas. Sin pasar por caja. 
+            </p>
+            <p>Esto lo protege frente a nuestras intenciones de renombrar, mover o eliminar "el original".</p>
+            <pre>ln archivo_original.txt enlace_duro.txt</pre>
+            <p><b>Ahora tienes dos nombres distintos, en el mismo sistema de archivos, que apuntan al mismo inodo</b>.
+                <br>Y lo más interesante: <b>NO ocupa espacio extra por el contenido del archivo</b>, porque el contenido no se duplica. Solo ocupan unos pocos bytes por la entrada del directorio.
+                <br>Básicamente tienes dos pegatinas que apuntan al mismo inode.
+                <br>Para verificarlo puedes ejecutar un <code>ls -li</code> y verás algo como:
+            </p>
+            <pre><b style="color: red;">348902</b> -rw-r--r-- 2 usuario grupo 1234 jul 16 10:00 archivo_original.txt
+<b style="color: red;">348902</b> -rw-r--r-- 2 usuario grupo 1234 jul 16 10:00 enlace_duro.txt</pre>
+            <p>Mismo inodo = misma alma = misma cosa.</p>
+            <p><b>¿Qué significa esto?</b></p>
+            <p>Que puedes borrar uno, y el contenido sigue ahí. Porque sigue habiendo un nombre apuntando al inodo.
+                <br>Y el sistema solo borra de verdad cuando el contador de hard links llega a cero.
+            </p>
+            <h3>¿CUANDO USAR UNO U OTRO?</h3>
+            <p>¿Quieres crear un acceso rápido a un archivo, sin importar si lo mueven o no? <b>Hard link</b>.</p>
+            <p>¿Quieres un acceso directo estilo Windows, con nombre, carita feliz y fragilidad emocional? <b>Soft link</b>.</p>
+            <p>¿Estás enlazando archivos entre diferentes particiones o sistemas de archivos? Olvídate de los hard links, solo los <b>soft links</b> funcionan ahí.</p>
+            <p>¿Estás montando backups incrementales sin ocupar espacio de más? <b>Hard links</b>. Benditos sean.</p>
+            <h3>COSAS QUE NO TE AVISAN</h3>
+            <p>Un directorio no puede tener hard links así como así. El sistema te lo prohíbe para que no hagas bucles infinitos.</p>
+            <p>Borras el archivo “original”, y el contenido sigue ahí, como un zombi con buena salud. Porque aún hay un hard link que se niega a soltarlo. Nadie se entera. El contenido sobrevive.</p>
+            <p>Los soft links son como tus expectativas: pueden apuntar a cualquier cosa, incluso a algo que no existe (hola, error 404).</p>
+            <h3>Ejemplo completo:</h3>
+            <p><i>Fíjate en los inodes y en la columna de tipo de archivo</i></p>
+            <pre>$ ls -li
+12345 -rw-r--r-- 2 usuario grupo 4096 jul 16 10:00 archivo_original.txt
+12345 -rw-r--r-- 2 usuario grupo 4096 jul 16 10:00 enlace_duro.txt
+23456 lrwxrwxrwx 1 usuario grupo   20 jul 16 10:01 enlace_simbolico.txt -> archivo_original.txt</pre>
+        </section>
+        <section class="section">
+            <h3>CONCLUSIÓN: NOMBRES HAY MUCHOS, PERO INODOS HAY UNO (Y MANDA MÁS QUE TÚ)</h3>
+            <p>Los hard links son identidad.
+                <br>Los soft links son fachada.</p>
+            <p>La próxima vez que enlaces algo, pregúntate:</p>
+            <p>&ensp;<b>¿Quiero un espejo o un clon?</b></p>
+            <p>Porque de eso va todo esto:
+            <br><b>Saber cómo funciona el sistema, para que no te humille en público cuando lo necesitas</b>.</p>
+        </section>
+    </main>
+    
+</body>
+</html>
